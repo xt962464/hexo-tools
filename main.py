@@ -216,20 +216,21 @@ def showInfo():
 # 部署按钮点击事件
 def updatePage():
     if "cookie" in userInfo.keys():
-        createShowInfo()
-        build=rebuild()
-        if build:
-            while True:
-                time.sleep(2)
-                falg=getpages()
-                if falg==-1:
-                    tkinter.messagebox.showerror('提示', '更新失败！')
-                    break
-                elif falg == 1:
-                    tkinter.messagebox.showinfo('提示', '更新完成！')
-                    break
-        else:
-            tkinter.messagebox.showerror('提示', '更新失败！')
+        falge = tkinter.messagebox.askokcancel("温馨提示", "确认要更新部署吗")
+        if falge:
+            build=rebuild()
+            if build:
+                while True:
+                    time.sleep(2)
+                    falg=getpages()
+                    if falg==-1:
+                        tkinter.messagebox.showerror('提示', '更新失败！')
+                        break
+                    elif falg == 1:
+                        tkinter.messagebox.showinfo('提示', '更新完成！')
+                        break
+            else:
+                tkinter.messagebox.showerror('提示', '更新失败！')
     else:
         tkinter.messagebox.showerror('警告', '请先填写信息！')
 
@@ -596,7 +597,7 @@ def createButton():
     global qiniu_doMain_Text
     qiniu_doMain_value = StringVar()
     if "domain" in userInfo.keys():
-        qiniu_doMain_value.set(userInfo["SK"])
+        qiniu_doMain_value.set(userInfo["domain"])
     qiniu_doMain_Text = Entry(button_frame2, width=55,textvariable=qiniu_doMain_value)
     qiniu_doMain_Text.grid(row=4, column=2,padx=8,pady=8)
 
